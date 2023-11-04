@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Unpkg</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+    <!-- you will need to inform Babel what code to transform by changing the script type to type=text/jsx -->
+    <script type="text/jsx">
+            const app = document.getElementById("app");                       
+
+            //React components should be capitalized to distinguish them from plain HTML and JavaScript.
+            function Header({ title, count }) {
+                return (
+                    //Ternary Operator with Template literals (backtick)
+                    <h1>{title ? `${title} ${count}` : `Default Title`}</h1>
+                )
+              }
+            function Button({ handleOnClick, count }) {
+                return(
+                    <button onClick={handleOnClick}>Count {count}</button>
+                )
+            }
+            function MainBody() {
+                const [count, setCount] = React.useState(0);
+                const handleOnClick = () => {
+                    setCount((prevCount) => (prevCount + 1))
+                }
+                return(
+                    <>
+                        <Header title='Hello ReactJS' count={count}/>
+                        <h1>{count}</h1>
+                        <Button handleOnClick={handleOnClick} count={count} />
+                    </>
+                )
+            }
+            ReactDOM.render(<MainBody />, app);            
+    </script>
+</body>
+</html>
